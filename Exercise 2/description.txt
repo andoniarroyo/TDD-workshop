@@ -1,0 +1,20 @@
+The pension calculator:
+
+Calculates the monthly amount to be payed back based on the previously paid
+amount and the age:
+
+Should return 0 in the next cases:
+  -the age is lower than 65 or higher than 150.
+  -the paid amount is 0
+
+In any other case should return the quantity to be payed with the next formula:
+
+  paidAmount / (151 - age) (rounded up)
+
+ For example:
+  paidAmount = 100000;
+  age = 75;
+
+  the calculated pension should be : 1315.79
+
+Note: remember run 'npm install' to get the dependencies

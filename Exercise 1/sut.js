@@ -1,11 +1,7 @@
 const from0 = () => '15';
-
 const from15 = () => '30';
-
 const from30 = () => '40';
-
 const from40 = (loserPoints) => loserPoints === "40" ? "A" : "40"; 
-
 const fromA = () => 'A';
 
 const advanceRules = {

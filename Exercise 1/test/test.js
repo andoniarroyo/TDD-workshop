@@ -1,4 +1,3 @@
-import expect from 'expect';
 import { player1Scored, player2Scored } from '../sut';
 
 const gameScoreFactory = (player1 = '0', player2 = '0') => (

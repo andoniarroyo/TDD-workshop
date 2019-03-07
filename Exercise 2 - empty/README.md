@@ -1,8 +1,5 @@
 
-**
-
 ## The pension calculator:
-
 
 Calculates the monthly amount to be payed back based on the contributed money and the age:
 

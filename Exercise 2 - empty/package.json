@@ -1,20 +1,17 @@
 {
   "name": "exercise2",
   "version": "1.0.0",
-  "description": "TDD workshop",
+  "description": "TDD - Getting a Grip",
+  "author": "Andoni Arroyo (https://www.meetup.com/TheDevWorkbench/)",
   "main": "index.js",
-  "scripts": {
-    "test": "mocha --compilers js:babel-core/register"
-  },
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
-    "expect": "^1.20.2",
-    "mocha": "3.5.3",
-    "babel-core": "6.26.0",
-    "babel-preset-env": "1.6.0"
+    "@babel/core": "*",
+    "@babel/preset-env": "*",
+    "babel-jest": "*",
+    "jest": "*"
   },
-  "babel": {
-    "presets": ["env"]
+  "scripts": {
+    "test": "jest --watchAll"
   }
 }

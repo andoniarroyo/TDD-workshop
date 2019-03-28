@@ -1,8 +1,9 @@
 import expect from 'expect';
 import sut from '../sut';
 
-describe('', () => {
-    it('', () => {
+describe('The System Under Test', () => {
+    it('does its work', () => {
+        sut();
         expect(true).toBe(true);
     })
 });

@@ -23,13 +23,13 @@ For instance:
 
 - P1 (15) P2 (0), wins P1 => P1(30) P2(0)
 
-- P3 (30) P2 (0), wins P1 => P1(40) P2(0)
+- P1 (30) P2 (0), wins P1 => P1(40) P2(0)
 
-- P3 (40) P2 (0), wins P2 => P1(40) P2(15)
+- P1 (40) P2 (0), wins P2 => P1(40) P2(15)
 
-- P3 (40) P2 (15), wins P2 => P1(40) P2(30)
+- P1 (40) P2 (15), wins P2 => P1(40) P2(30)
 
-- P3 (40) P2 (30), wins P2 => DEUCE
+- P1 (40) P2 (30), wins P2 => DEUCE
 
 - DEUCE, wins P2 => P1(40) P2(A)
 

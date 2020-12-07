@@ -5,13 +5,16 @@
   "author": "Andoni Arroyo (https://www.meetup.com/TheDevWorkbench/)",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  } ,
   "devDependencies": {
     "@babel/core": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
     "babel-jest": "^25.1.0",
     "jest": "^25.1.0"
-  },
-  "scripts": {
-    "test": "jest --watchAll"
   }
 }

@@ -1,42 +1,60 @@
-const from0 = () => '15';
-const from15 = () => '30';
-const from30 = () => '40';
-const from40 = (loserPoints) => loserPoints === "40" ? "A" : "40"; 
-const fromA = () => 'A';
-
 const advanceRules = {
-    from0,
-    from15,
-    from30,
-    from40,
-    fromA,
+    from0: loserScore => '15',
+    from15: loserScore => '30',
+    from30: loserScore => '40',
+    from40: loserScore => loserScore === "40" ? "A" : "40",
+    fromA: loserScore => 'A'
   };
 
-const getLoserPlayer = (winner) => winner === 'player1' ? 'player2' : 'player1'
+const getLoserPlayer = winner => winner === 'player1' ? 'player2' : 'player1'
 
 const createGameScore = (player1, player2, isFinished, winner) => ({
- player1,
- player2,
- isFinished,
- winner : isFinished ? winner : undefined
-})
+  player1,
+  player2,
+  isFinished,
+  winner
+});
 
-const playerScored = (previousGameScore, winner) => {
-    const winnerScore = previousGameScore[winner];
-    const loser = getLoserPlayer(winner);
-    const loserScore = previousGameScore[loser];
+const calculateNewGameScore = (previousGameScore, winner) => {
+  const { winnerScore, loserScore } = getWinerLoserScores(previousGameScore, winner);
 
-    const newWinnerScore = advanceRules[`from${winnerScore}`](loserScore);
-    const newLoserScore = ((newWinnerScore === winnerScore) && loserScore === 'A') ? '40' : loserScore
+  const newWinnerScore = calculateNewWinnerScore(winnerScore, loserScore);
+  const newLoserScore = calculateNewLoserScore(winnerScore, newWinnerScore, loserScore);
 
-    const isFinished = (newWinnerScore === winnerScore) && loserScore!=='A'
+  const { player1Score, player2Score } = getPlayersScore(winner, newWinnerScore, newLoserScore);
+  const isMatchFinished = isFinished(winnerScore, newWinnerScore, loserScore);
+  const matchWinner = isMatchFinished ? winner : undefined  
     
-    const player1 = winner === 'player1' ? newWinnerScore : newLoserScore;
-    const player2 = winner === 'player2' ? newWinnerScore : newLoserScore;
-
-    return createGameScore(player1, player2, isFinished, winner);
+  return createGameScore(player1Score, player2Score, isMatchFinished, matchWinner);
 }
 
-export const player1Scored = (previousGameScore) => playerScored(previousGameScore, 'player1')
+const getWinerLoserScores = (gameScore, winner) => (
+  {
+    winnerScore: gameScore[winner],
+    loserScore: gameScore[getLoserPlayer(winner)]
+  }
+)
 
-export const player2Scored = (previousGameScore) => playerScored(previousGameScore, 'player2')
+const calculateNewWinnerScore = (winnerScore, loserScore) =>
+  advanceRules[`from${winnerScore}`](loserScore);
+
+// The loser was in advance but the winner won, the loser is back to 40
+const calculateNewLoserScore = (winnerScore, newWinnerScore, loserScore) =>
+  ((newWinnerScore === winnerScore) && loserScore === 'A') ? '40' : loserScore
+
+const getPlayersScore = (winner, newWinnerScore, newLoserScore) => {
+  const player1Score = winner === 'player1' ? newWinnerScore : newLoserScore;
+  const player2Score = winner === 'player2' ? newWinnerScore : newLoserScore;
+  return {
+    player1Score,
+    player2Score
+  }
+}
+
+const isFinished = (winnerScore, newWinnerScore, loserScore) =>
+  (newWinnerScore === winnerScore) && loserScore !== 'A';
+
+// public API
+export const player1Scored = previousGameScore => calculateNewGameScore(previousGameScore, 'player1')
+
+export const player2Scored = previousGameScore => calculateNewGameScore(previousGameScore, 'player2')
